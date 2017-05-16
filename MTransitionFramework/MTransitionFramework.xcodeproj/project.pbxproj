@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		62008B9D1EC98CE300C34B26 /* MTransitionFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 62008B9B1EC98CE300C34B26 /* MTransitionFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		62008BAB1EC98D3900C34B26 /* MNavigationTransitioningBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 62008BA31EC98D3900C34B26 /* MNavigationTransitioningBase.h */; };
-		62008BAC1EC98D3900C34B26 /* MNavigationTransitioningBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 62008BA41EC98D3900C34B26 /* MNavigationTransitioningBase.m */; };
+		62008BAB1EC98D3900C34B26 /* MNavigationTransitioning.h in Headers */ = {isa = PBXBuildFile; fileRef = 62008BA31EC98D3900C34B26 /* MNavigationTransitioning.h */; };
+		62008BAC1EC98D3900C34B26 /* MNavigationTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 62008BA41EC98D3900C34B26 /* MNavigationTransitioning.m */; };
 		62008BAD1EC98D3900C34B26 /* MNavigationControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 62008BA51EC98D3900C34B26 /* MNavigationControllerDelegate.h */; };
 		62008BAE1EC98D3900C34B26 /* MNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62008BA61EC98D3900C34B26 /* MNavigationControllerDelegate.m */; };
 		62008BAF1EC98D3900C34B26 /* MNavigationTransitioningLeftPush.h in Headers */ = {isa = PBXBuildFile; fileRef = 62008BA71EC98D3900C34B26 /* MNavigationTransitioningLeftPush.h */; };
@@ -24,16 +24,14 @@
 		62008BCD1EC98D5E00C34B26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62008BCB1EC98D5E00C34B26 /* LaunchScreen.storyboard */; };
 		62008BD61EC98EC600C34B26 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62008BD51EC98EC600C34B26 /* MainTableViewController.m */; };
 		62008BD71EC990D000C34B26 /* MTransitionFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62008B981EC98CE300C34B26 /* MTransitionFramework.framework */; };
-		62008BDA1EC9AEED00C34B26 /* MNavigationTransitioningModal.h in Headers */ = {isa = PBXBuildFile; fileRef = 62008BD81EC9AEED00C34B26 /* MNavigationTransitioningModal.h */; };
-		62008BDB1EC9AEED00C34B26 /* MNavigationTransitioningModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 62008BD91EC9AEED00C34B26 /* MNavigationTransitioningModal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		62008B981EC98CE300C34B26 /* MTransitionFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MTransitionFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62008B9B1EC98CE300C34B26 /* MTransitionFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTransitionFramework.h; sourceTree = "<group>"; };
 		62008B9C1EC98CE300C34B26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		62008BA31EC98D3900C34B26 /* MNavigationTransitioningBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNavigationTransitioningBase.h; sourceTree = "<group>"; };
-		62008BA41EC98D3900C34B26 /* MNavigationTransitioningBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNavigationTransitioningBase.m; sourceTree = "<group>"; };
+		62008BA31EC98D3900C34B26 /* MNavigationTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNavigationTransitioning.h; sourceTree = "<group>"; };
+		62008BA41EC98D3900C34B26 /* MNavigationTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNavigationTransitioning.m; sourceTree = "<group>"; };
 		62008BA51EC98D3900C34B26 /* MNavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNavigationControllerDelegate.h; sourceTree = "<group>"; };
 		62008BA61EC98D3900C34B26 /* MNavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNavigationControllerDelegate.m; sourceTree = "<group>"; };
 		62008BA71EC98D3900C34B26 /* MNavigationTransitioningLeftPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNavigationTransitioningLeftPush.h; sourceTree = "<group>"; };
@@ -52,8 +50,6 @@
 		62008BCE1EC98D5E00C34B26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62008BD41EC98EC600C34B26 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		62008BD51EC98EC600C34B26 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
-		62008BD81EC9AEED00C34B26 /* MNavigationTransitioningModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNavigationTransitioningModal.h; sourceTree = "<group>"; };
-		62008BD91EC9AEED00C34B26 /* MNavigationTransitioningModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNavigationTransitioningModal.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,12 +94,10 @@
 			children = (
 				62008BA51EC98D3900C34B26 /* MNavigationControllerDelegate.h */,
 				62008BA61EC98D3900C34B26 /* MNavigationControllerDelegate.m */,
-				62008BA31EC98D3900C34B26 /* MNavigationTransitioningBase.h */,
-				62008BA41EC98D3900C34B26 /* MNavigationTransitioningBase.m */,
+				62008BA31EC98D3900C34B26 /* MNavigationTransitioning.h */,
+				62008BA41EC98D3900C34B26 /* MNavigationTransitioning.m */,
 				62008BA71EC98D3900C34B26 /* MNavigationTransitioningLeftPush.h */,
 				62008BA81EC98D3900C34B26 /* MNavigationTransitioningLeftPush.m */,
-				62008BD81EC9AEED00C34B26 /* MNavigationTransitioningModal.h */,
-				62008BD91EC9AEED00C34B26 /* MNavigationTransitioningModal.m */,
 				62008BA91EC98D3900C34B26 /* UINavigationController+Transitioning.h */,
 				62008BAA1EC98D3900C34B26 /* UINavigationController+Transitioning.m */,
 				62008B9B1EC98CE300C34B26 /* MTransitionFramework.h */,
@@ -147,9 +141,8 @@
 			files = (
 				62008B9D1EC98CE300C34B26 /* MTransitionFramework.h in Headers */,
 				62008BB11EC98D3900C34B26 /* UINavigationController+Transitioning.h in Headers */,
-				62008BAB1EC98D3900C34B26 /* MNavigationTransitioningBase.h in Headers */,
+				62008BAB1EC98D3900C34B26 /* MNavigationTransitioning.h in Headers */,
 				62008BAF1EC98D3900C34B26 /* MNavigationTransitioningLeftPush.h in Headers */,
-				62008BDA1EC9AEED00C34B26 /* MNavigationTransitioningModal.h in Headers */,
 				62008BAD1EC98D3900C34B26 /* MNavigationControllerDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,8 +252,7 @@
 			files = (
 				62008BB01EC98D3900C34B26 /* MNavigationTransitioningLeftPush.m in Sources */,
 				62008BAE1EC98D3900C34B26 /* MNavigationControllerDelegate.m in Sources */,
-				62008BAC1EC98D3900C34B26 /* MNavigationTransitioningBase.m in Sources */,
-				62008BDB1EC9AEED00C34B26 /* MNavigationTransitioningModal.m in Sources */,
+				62008BAC1EC98D3900C34B26 /* MNavigationTransitioning.m in Sources */,
 				62008BB21EC98D3900C34B26 /* UINavigationController+Transitioning.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

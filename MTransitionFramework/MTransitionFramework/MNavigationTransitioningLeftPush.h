@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MNavigationTransitioningBase.h"
+#import "MNavigationTransitioning.h"
 
 @protocol MNavigationTransitioningLeftPushDelegate <NSObject>
 
 /**
- Can reposne to the left in gesture
+ Can reposne to the left push gesture
 
  @return YES，in ，NO
  */
@@ -20,7 +20,7 @@
 
 
 /**
- response to left in gesture, in this method ,you should push viewcontroller like this ,
+ response to left push gesture, in this method ,you should push viewcontroller like this ,
  the animated parameter must be YES;
  
  ```
@@ -40,9 +40,10 @@
  note： while using this class , it may conflict with the back gesture;
  isPresenting always return YES
  */
-@interface MNavigationTransitioningLeftPush : MNavigationTransitioningBase<UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
+@interface MNavigationTransitioningLeftPush : MNavigationTransitioning<UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
 
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *leftPushPanGesture;     //left push in gesture
+
 @property (nonatomic, weak) id<MNavigationTransitioningLeftPushDelegate> delegate;
 
 @end

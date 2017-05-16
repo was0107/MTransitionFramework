@@ -8,6 +8,7 @@
 
 #import "MNavigationTransitioningLeftPush.h"
 #import "UINavigationController+Transitioning.h"
+#import "MNavigationTransitioning.h"
 
 @interface MNavigationTransitioningLeftPush()
 
@@ -26,42 +27,40 @@
 
 - (void) setDelegate:(id<MNavigationTransitioningLeftPushDelegate>)delegate {
     _delegate = delegate;
-    self.leftPushPanGesture.enabled = _delegate?YES:NO;
-    if (_delegate) {
-        self.navigationController.delegate = self;
-    } else {
-        [self.navigationController resetNavigationDelegate];
-    }
+    self.leftPushPanGesture.enabled = self.enable =  _delegate ? YES : NO;
 }
 
-- (void) dealloc {
-}
-
-#pragma mark --UIViewControllerAnimatedTransitioning
-
-- (void) prepareForPresentingAnimations:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (void (^)(id<UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioning *trans)) block {
+    __weak __typeof(self)weakSelf = self;
     
-    [super prepareForPresentingAnimations:transitionContext];
-    CGSize size = self.containerSize;
-    self.fromView.frame = CGRectMake(0, 0, size.width, size.height);
+    CGSize size = self.containerView.bounds.size;
     self.toView.frame = CGRectMake(size.width, 0, size.width, size.height);
-}
+    weakSelf.toView.userInteractionEnabled = NO;
 
-- (void) doPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
-    self.fromView.frame = CGRectMake(-0.3 * self.containerSize.width, 0, self.containerSize.width, self.containerSize.height);
-    self.toView.frame = CGRectMake(0, 0, self.containerSize.width, self.containerSize.height);
-}
+    return ^(id<UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioning *trans) {
+        [UIView animateWithDuration:[trans transitionDuration:transitionContext]
+                         animations:^
+         {
+             weakSelf.fromView.frame = CGRectMake(-0.3 * size.width, 0, size.width, size.height);
+             weakSelf.toView.frame = CGRectMake(0, 0, size.width, size.height);
+             
+         }
+                         completion:^(BOOL finished)
+         {
+             
+             weakSelf.fromView.frame = CGRectMake(0, 0, size.width, size.height);
 
-- (void) endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
-    self.fromView.frame = CGRectMake(0, 0, self.containerSize.width, self.containerSize.height);
+             [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
+             weakSelf.toView.userInteractionEnabled = YES;
+         }];
+    };
 }
-
 
 #pragma mark - gesture
 
-- (void)setNavigationController:(UINavigationController *)navigationController{
-    [super setNavigationController:navigationController];
-    [navigationController.view addGestureRecognizer:self.leftPushPanGesture];
+- (void)setViewController:(UIViewController *)viewController {
+    [super setViewController:viewController];
+    [viewController.view addGestureRecognizer:self.leftPushPanGesture];
 }
 
 - (UIPanGestureRecognizer *)leftPushPanGesture {
@@ -70,7 +69,7 @@
                                                                                                           action:@selector(handleLeftPushRecognizer:)];
         pushGesture.edges = UIRectEdgeRight;
         _leftPushPanGesture = pushGesture;
-        [_leftPushPanGesture requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
+        [_leftPushPanGesture requireGestureRecognizerToFail:self.viewController.navigationController.interactivePopGestureRecognizer];
     }
     return _leftPushPanGesture;
 }
@@ -85,7 +84,7 @@
         return;
     }
     
-    CGFloat progress = [recognizer translationInView:self.navigationController.view].x / (self.navigationController.view.bounds.size.width);
+    CGFloat progress = [recognizer translationInView:self.viewController.view].x / (self.viewController.view.bounds.size.width);
 
     BOOL canLeftPush = NO;
     if (!self.delegate || [self.delegate respondsToSelector:@selector(canResponseToNavigationLeftPush)]) {

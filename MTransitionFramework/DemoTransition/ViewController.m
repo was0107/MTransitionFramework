@@ -8,11 +8,12 @@
 
 #import "ViewController.h"
 #import "UINavigationController+Transitioning.h"
-#import "MNavigationTransitioningModal.h"
+#import "MNavigationTransitioning.h"
+
 
 @interface BaseViewController()
 
-@property (nonatomic, strong) MNavigationTransitioningBase *navigationTransitioning;
+@property (nonatomic, strong) MNavigationTransitioning *navigationTransitioning;
 @property (nonatomic, strong) UIButton *button;
 @end
 
@@ -35,11 +36,6 @@
     }
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    self.navigationController.delegate = self.navigationTransitioning;
-}
-
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.navigationController resetNavigationDelegate];
@@ -52,6 +48,8 @@
 }
 
 - (IBAction)buttonAction:(id)sender {
+    self.navigationTransitioning.enable = YES;
+
     BaseViewController *controller = [[BaseViewController alloc] init];
     controller.title = @"Demo";
     [self.navigationController pushViewController:controller animated:YES];
@@ -70,7 +68,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationTransitioning = [[MNavigationTransitioningLeftPush alloc] initWithNavigationController:self.navigationController];
+    self.navigationTransitioning = [[MNavigationTransitioningLeftPush alloc] initWithController:self];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -101,19 +99,19 @@
 @implementation CenterViewController
 
 
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
-    self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioningCenter") alloc] initWithNavigationController:self.navigationController];
+    self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioningCenter") alloc] initWithController:self];
     ((MNavigationTransitioningCenter*) self.navigationTransitioning).originRect = CGRectMake(0, CGRectGetHeight(self.view.bounds)/2, CGRectGetWidth(self.view.bounds), 0);
 }
 
-- (IBAction)buttonAction:(id)sender {
-    self.navigationTransitioning.enable = YES;
-    BaseViewController *controller = [[BaseViewController alloc] init];
-    controller.title = @"Demo";
-    [self.navigationController pushViewController:controller animated:YES];
-}
 @end
 
 
@@ -124,21 +122,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
-    self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioningModal") alloc] initWithNavigationController:self.navigationController];
+    self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioningModal") alloc] initWithController:self];
 }
 
-- (IBAction)buttonAction:(id)sender {
-    self.navigationTransitioning.enable = YES;
-    BaseViewController *controller = [[BaseViewController alloc] init];
-    controller.title = @"Demo";
-    [self.navigationController pushViewController:controller animated:YES];
-    self.navigationTransitioning.enable = NO;
-    [self.navigationController resetNavigationDelegate];
-
-}
 
 @end
-
 
 
 @implementation CustomViewController
@@ -147,11 +135,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
-    self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioningCustom") alloc] initWithNavigationController:self.navigationController];
+    self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioning") alloc] initWithController:self];
     __weak __typeof(self)weakSelf = self;
 
-    [((MNavigationTransitioningCustom*) self.navigationTransitioning)
-     transitionWithPresenting:^(id<UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioningBase *trans)
+    [((MNavigationTransitioning*) self.navigationTransitioning)
+     transitionWithPresenting:^(id<UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioning *trans)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = weakSelf.button.frame;
@@ -173,11 +161,12 @@
          }];
     }
      
-     end:^(id<UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioningBase *trans)
+     end:^(id<UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioning *trans)
     {
         [UIView animateWithDuration:[trans transitionDuration:transitionContext]
                          animations:^
          {
+             
          }
                          completion:^(BOOL finished)
          {
@@ -186,14 +175,5 @@
          }];
     }];
 }
-- (IBAction)buttonAction:(id)sender {
-    self.navigationTransitioning.enable = YES;
-    BaseViewController *controller = [[BaseViewController alloc] init];
-    controller.title = @"Demo";
-    [self.navigationController pushViewController:controller animated:YES];
-    self.navigationTransitioning.enable = NO;
-//    [self.navigationController resetNavigationDelegate];
-}
-
 
 @end
