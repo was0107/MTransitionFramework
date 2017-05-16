@@ -11,7 +11,7 @@
 @interface MNavigationTransitioningBase : MNavigationControllerDelegate<UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
 @property (nonatomic, assign, getter=isPresenting) BOOL presenting;     //presenting or not
 @property (nonatomic, assign) IBOutlet UINavigationController  *navigationController;   //releate navigation controller
-
+@property (nonatomic, assign) BOOL enable;
 @property (nonatomic, weak) UIView *containerView;
 @property (nonatomic, weak) UIViewController *fromVC;
 @property (nonatomic, weak) UIViewController *toVC;
@@ -40,7 +40,7 @@
 
  @param transitionContext transitionContext description
  */
-- (void)beginPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext;
+- (void) doPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext;
 
 
 /**
@@ -48,7 +48,7 @@
 
  @param transitionContext transitionContext description
  */
-- (void)endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext;
+- (void) endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext;
 
 
 /**
@@ -64,7 +64,7 @@
  
  @param transitionContext transitionContext description
  */
-- (void)beginClosingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext;
+- (void) doClosingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext;
 
 /**
  finish aniated block

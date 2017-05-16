@@ -8,81 +8,94 @@
 
 #import "MNavigationTransitioningModal.h"
 
-@interface MNavigationTransitioningModal()
-@property (nonatomic, strong) UIPercentDrivenInteractiveTransition *transitioning;
-
-
-@end
-
 @implementation MNavigationTransitioningModal
-//
-- (BOOL) isPresenting {
-    return YES;
-}
-////
-//
-//#pragma mark --UIViewControllerAnimatedTransitioning
-//
+
+#pragma mark --UIViewControllerAnimatedTransitioning
+
 - (void) prepareForPresentingAnimations:(id<UIViewControllerContextTransitioning>)transitionContext {
-    
-    [super prepareForPresentingAnimations:transitionContext];
     CGSize size = self.containerSize;
-    self.fromView.frame = CGRectMake(0, 0, size.width, size.height);
-    self.toView.frame = CGRectMake(size.width, 0, size.width, size.height);
+    self.toView.frame = CGRectMake(0, size.height, size.width, size.height);
 }
 
-- (void)beginPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
-    self.fromView.frame = CGRectMake(-0.3 * self.containerSize.width, 0, self.containerSize.width, self.containerSize.height);
+- (void) doPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
     self.toView.frame = CGRectMake(0, 0, self.containerSize.width, self.containerSize.height);
 }
 
-- (void)endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+- (void) endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
     self.fromView.frame = CGRectMake(0, 0, self.containerSize.width, self.containerSize.height);
 }
-//
-//
-//- (void)beginClosingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
-////    CGSize size = self.containerSize;
-////    self.fromView.frame = CGRectMake(0, size.height, size.width, size.height);
-//
-//}
-//
-//- (void)endClosingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
-//
-//}
-//
-//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-//    
-//    [super navigationController:navigationController willShowViewController:viewController animated:animated];
-//}
-//
-//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-//    
-//    [super navigationController:navigationController didShowViewController:viewController animated:animated];
-//    
-//}
-//
-- (nullable id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
-                                   interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController  {
-    
-    if ([animationController isKindOfClass:[MNavigationTransitioningModal class]]) {
 
-        
-        _transitioning = [[UIPercentDrivenInteractiveTransition alloc] init];
-        _transitioning.completionCurve = UIViewAnimationCurveEaseInOut;
-        [_transitioning finishInteractiveTransition];
-        return _transitioning;
-    }
-    
-    return nil;
+- (void) doClosingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+    CGSize size = self.containerSize;
+    self.fromView.frame = CGRectMake(0, size.height, size.width, size.height);
 }
 
-- (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
-                                            animationControllerForOperation:(UINavigationControllerOperation)operation
-                                                         fromViewController:(UIViewController *)fromVC
-                                                           toViewController:(UIViewController *)toVC {
-    
-    self.presenting = (UINavigationControllerOperationPush == operation);
-    return (UINavigationControllerOperationPush == operation)?self:nil;
-}
 @end
+
+#pragma mark --
+#pragma mark -- MNavigationTransitioningCenter
+
+@implementation MNavigationTransitioningCenter
+
+#pragma mark --UIViewControllerAnimatedTransitioning
+
+- (void) prepareForPresentingAnimations:(id<UIViewControllerContextTransitioning>)transitionContext {
+    self.toView.frame = self.originRect;
+}
+
+- (void) doPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+    self.toView.frame = CGRectMake(0, 0, self.containerSize.width, self.containerSize.height);
+}
+
+- (void) endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+    self.fromView.frame = CGRectMake(0, 0, self.containerSize.width, self.containerSize.height);
+}
+
+- (void) doClosingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+    self.fromView.frame = self.originRect;
+}
+
+@end
+
+#pragma mark --
+#pragma mark -- MNavigationTransitioningCustom
+
+@interface MNavigationTransitioningCustom ()
+@property (nonatomic, copy) void (^block)(id <UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioningBase *trans) ;
+@property (nonatomic, copy) void (^endBlock)(id <UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioningBase *trans) ;
+
+@end
+
+@implementation MNavigationTransitioningCustom
+
+
+- (void) transitionWithPresenting:(void (^)(id <UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioningBase *trans)) block
+                              end:(void (^)(id <UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioningBase *trans)) endBlock {
+    self.block = block;
+    self.endBlock = endBlock;
+}
+
+#pragma mark --UIViewControllerAnimatedTransitioning
+
+- (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
+    
+    self.containerView = [transitionContext containerView];
+    self.fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    self.toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    self.fromView = self.fromVC.view;
+    self.toView = self.toVC.view;
+    self.containerSize = self.containerView.bounds.size;
+    
+    if ([self isPresenting]) {
+        [self.containerView addSubview:self.fromView];
+        [self.containerView addSubview:self.toView];
+        !self.block?:self.block(transitionContext, self);
+        
+    } else {
+        !self.endBlock?:self.endBlock(transitionContext, self);
+    }
+}
+
+@end
+
+

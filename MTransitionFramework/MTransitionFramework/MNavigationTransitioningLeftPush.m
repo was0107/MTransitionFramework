@@ -47,12 +47,12 @@
     self.toView.frame = CGRectMake(size.width, 0, size.width, size.height);
 }
 
-- (void)beginPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+- (void) doPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
     self.fromView.frame = CGRectMake(-0.3 * self.containerSize.width, 0, self.containerSize.width, self.containerSize.height);
     self.toView.frame = CGRectMake(0, 0, self.containerSize.width, self.containerSize.height);
 }
 
-- (void)endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+- (void) endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
     self.fromView.frame = CGRectMake(0, 0, self.containerSize.width, self.containerSize.height);
 }
 

@@ -20,8 +20,9 @@
     [super viewDidLoad];
     
     _datas = @[@{@"name":@"左滑进入", @"class":@"LeftPushViewController"},
-               @{@"name":@"居中进入", @"class":@"LeftPushViewController"},
-               @{@"name":@"模态进入", @"class":@"ModalViewController"}];
+               @{@"name":@"居中进入", @"class":@"CenterViewController"},
+               @{@"name":@"模态进入", @"class":@"ModalViewController"},
+               @{@"name":@"自定义",   @"class":@"CustomViewController"}];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 }

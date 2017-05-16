@@ -479,6 +479,7 @@
 				62008BA21EC98CE300C34B26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		62008BCF1EC98D5E00C34B26 /* Build configuration list for PBXNativeTarget "DemoTransition" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +488,7 @@
 				62008BD11EC98D5E00C34B26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

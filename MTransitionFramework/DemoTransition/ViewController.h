@@ -20,6 +20,16 @@
 @end
 
 
+@interface CenterViewController : BaseViewController
+
+@end
+
+
 @interface ModalViewController : BaseViewController
+
+@end
+
+
+@interface CustomViewController : BaseViewController
 
 @end

@@ -38,11 +38,11 @@
 - (void)prepareForPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
 }
 
-- (void)beginPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+- (void) doPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
     
 }
 
-- (void)endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+- (void) endPresentingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
     
 }
 
@@ -50,23 +50,12 @@
     
 }
 
-- (void)beginClosingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
+- (void) doClosingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext {
     
 }
 
 - (void)endClosingAnimations:(id <UIViewControllerContextTransitioning>)transitionContext
-{
-//    [self.fromView removeFromSuperview];
-//    /**
-//     ios8 bug? patch
-//     work on both ios7 and ios8
-//     **/
-//    if (![[UIApplication sharedApplication].keyWindow.subviews containsObject:self.toView]) {
-//        if (self.toView.superview)
-//            [self.toView removeFromSuperview];
-//        [[[UIApplication sharedApplication] keyWindow] addSubview:self.toView];
-//    }
-//    
+{ 
 }
 
 #pragma mark --UIViewControllerAnimatedTransitioning
@@ -87,9 +76,11 @@
     self.toView = self.toVC.view;
     self.containerSize = self.containerView.bounds.size;
     
-
+    self.toView.layer.masksToBounds = YES;
+    self.fromView.layer.masksToBounds = YES;
+    
     if ([self isPresenting]) {
-        [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view.userInteractionEnabled = NO;
+        self.toView.userInteractionEnabled = NO;
         [self.containerView addSubview:self.fromView];
         [self.containerView addSubview:self.toView];
         [self prepareForPresentingAnimations:transitionContext];
@@ -97,27 +88,31 @@
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
                          animations:^
         {
-            [weakSelf beginPresentingAnimations:transitionContext];
+            [weakSelf doPresentingAnimations:transitionContext];
         }
                          completion:^(BOOL finished)
         {
             [weakSelf endPresentingAnimations:transitionContext];
             [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
-            [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view.userInteractionEnabled = YES;
+            weakSelf.toView.userInteractionEnabled = YES;
         }];
         
     } else {
-        [self prepareForClosingAnimations:transitionContext];
+        [self.containerView addSubview:self.toView];
+        [self.containerView addSubview:self.fromView];
         
+        [self prepareForClosingAnimations:transitionContext];
+        self.fromView.userInteractionEnabled = NO;
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
                          animations:^
         {
-            [weakSelf beginClosingAnimations:transitionContext];
+            [weakSelf doClosingAnimations:transitionContext];
         }
                          completion:^(BOOL finished)
         {
             [weakSelf endClosingAnimations:transitionContext];
             [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
+            weakSelf.fromView.userInteractionEnabled = YES;
         }];
     }
 }
@@ -143,11 +138,14 @@
     return nil;
 }
 
+
 - (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                             animationControllerForOperation:(UINavigationControllerOperation)operation
                                                          fromViewController:(UIViewController *)fromVC
-                                                           toViewController:(UIViewController *)toVC
-{
-    return nil;
+                                                           toViewController:(UIViewController *)toVC {
+    
+    self.presenting = (UINavigationControllerOperationPush == operation);
+    return self.enable ? self : nil;
 }
+
 @end
