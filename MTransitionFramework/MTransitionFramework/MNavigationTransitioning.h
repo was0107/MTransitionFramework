@@ -10,7 +10,7 @@
 
 @interface MNavigationTransitioning : MNavigationControllerDelegate<UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
 @property (nonatomic, assign, getter=isPresenting) BOOL presenting;         //presenting or not
-@property (nonatomic, assign) IBOutlet UIViewController  *viewController;   //releate controller
+@property (nonatomic, weak) IBOutlet UIViewController  *viewController;   //releate controller
 @property (nonatomic, weak) UIViewController *fromVC;
 @property (nonatomic, weak) UIViewController *toVC;
 @property (nonatomic, weak) UIView *containerView;

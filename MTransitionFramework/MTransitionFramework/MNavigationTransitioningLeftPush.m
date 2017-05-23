@@ -65,9 +65,8 @@
 
 - (UIPanGestureRecognizer *)leftPushPanGesture {
     if (!_leftPushPanGesture) {
-        UIScreenEdgePanGestureRecognizer *pushGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
-                                                                                                          action:@selector(handleLeftPushRecognizer:)];
-        pushGesture.edges = UIRectEdgeRight;
+        UIPanGestureRecognizer *pushGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                      action:@selector(handleLeftPushRecognizer:)];
         _leftPushPanGesture = pushGesture;
         [_leftPushPanGesture requireGestureRecognizerToFail:self.viewController.navigationController.interactivePopGestureRecognizer];
     }
