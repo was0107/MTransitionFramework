@@ -52,6 +52,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *controller = [[NSClassFromString(_datas[indexPath.row][@"class"]) alloc] init];
     controller.title = _datas[indexPath.row][@"name"];
+    NSLog(@"self.nav = %@", self.navigationController);
+    NSLog(@"self.nav.delegate = %@", self.navigationController.delegate);
     [self.navigationController pushViewController:controller animated:YES];
 }
 @end

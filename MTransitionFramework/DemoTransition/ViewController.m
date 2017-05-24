@@ -41,6 +41,9 @@
     [self.navigationController resetNavigationDelegate];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -69,17 +72,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationTransitioning = [[MNavigationTransitioningLeftPush alloc] initWithController:self];
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     ((MNavigationTransitioningLeftPush *)self.navigationTransitioning).delegate = self;
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
+    self.navigationTransitioning.enable = NO;
     ((MNavigationTransitioningLeftPush *)self.navigationTransitioning).delegate = nil;
 }
 

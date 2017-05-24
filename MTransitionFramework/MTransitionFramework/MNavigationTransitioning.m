@@ -56,7 +56,6 @@
     return self.animateTime;
 }
 
-
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     
     self.containerView = [transitionContext containerView];
@@ -81,24 +80,6 @@
 
 
 #pragma mark --UINavigationControllerDelegate
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    
-    [super navigationController:navigationController willShowViewController:viewController animated:animated];
-}
-
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    
-    [super navigationController:navigationController didShowViewController:viewController animated:animated];
-}
-
-
-- (nullable id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
-                                   interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController  {
-    
-    
-    return nil;
-}
 
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController

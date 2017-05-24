@@ -8,9 +8,9 @@
 
 #import "MNavigationControllerDelegate.h"
 
-@interface MNavigationTransitioning : MNavigationControllerDelegate<UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
+@interface MNavigationTransitioning : MNavigationControllerDelegate<UIViewControllerAnimatedTransitioning>
 @property (nonatomic, assign, getter=isPresenting) BOOL presenting;         //presenting or not
-@property (nonatomic, weak) IBOutlet UIViewController  *viewController;   //releate controller
+@property (nonatomic, weak) UIViewController  *viewController;   //releate controller
 @property (nonatomic, weak) UIViewController *fromVC;
 @property (nonatomic, weak) UIViewController *toVC;
 @property (nonatomic, weak) UIView *containerView;
@@ -40,7 +40,7 @@
 /**
  Simulate modal presenting transition
  */
-@interface MNavigationTransitioningModal : MNavigationTransitioning<UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
+@interface MNavigationTransitioningModal : MNavigationTransitioning
 
 @end
 
@@ -50,7 +50,7 @@
 /**
  Transition from center
  */
-@interface MNavigationTransitioningCenter : MNavigationTransitioning<UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
+@interface MNavigationTransitioningCenter : MNavigationTransitioning
 @property (nonatomic, assign) CGRect originRect;
 @end
 

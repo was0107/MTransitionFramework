@@ -40,7 +40,7 @@
  note： while using this class , it may conflict with the back gesture;
  isPresenting always return YES
  */
-@interface MNavigationTransitioningLeftPush : MNavigationTransitioning<UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
+@interface MNavigationTransitioningLeftPush : MNavigationTransitioning
 
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *leftPushPanGesture;     //left push in gesture
 

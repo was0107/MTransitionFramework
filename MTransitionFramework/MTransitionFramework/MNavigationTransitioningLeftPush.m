@@ -25,14 +25,8 @@
     return YES;
 }
 
-- (void) setDelegate:(id<MNavigationTransitioningLeftPushDelegate>)delegate {
-    _delegate = delegate;
-    self.leftPushPanGesture.enabled = self.enable =  _delegate ? YES : NO;
-}
-
 - (void (^)(id<UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioning *trans)) block {
     __weak __typeof(self)weakSelf = self;
-    
     CGSize size = self.containerView.bounds.size;
     self.toView.frame = CGRectMake(size.width, 0, size.width, size.height);
     weakSelf.toView.userInteractionEnabled = NO;
@@ -83,6 +77,8 @@
         return;
     }
     
+    self.enable = YES;
+    
     CGFloat progress = [recognizer translationInView:self.viewController.view].x / (self.viewController.view.bounds.size.width);
 
     BOOL canLeftPush = NO;
@@ -124,21 +120,11 @@
 
 #pragma mark --UINavigationControllerDelegate
 
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-
-    [super navigationController:navigationController willShowViewController:viewController animated:animated];
-}
-
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    
-    [super navigationController:navigationController didShowViewController:viewController animated:animated];
-    
-}
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                                    interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController  {
     
-    if (self.isGesturePush && [animationController isKindOfClass:[MNavigationTransitioningLeftPush class]]) {
+    if (self.enable && self.isGesturePush && [animationController isKindOfClass:[MNavigationTransitioningLeftPush class]]) {
         return _transitioning;
     }
 
@@ -150,7 +136,7 @@
                                                          fromViewController:(UIViewController *)fromVC
                                                            toViewController:(UIViewController *)toVC {
     
-    BOOL flag = (self.isGesturePush && UINavigationControllerOperationPush == operation);
+    BOOL flag = (self.enable && self.isGesturePush && UINavigationControllerOperationPush == operation);
     return flag ? self : nil;
 }
 @end
