@@ -31,11 +31,11 @@ static CGFloat gTransionShadowWidth = 6.0f;
     CGSize size = self.containerView.bounds.size;
     weakSelf.toView.userInteractionEnabled = NO;
     
-    UIView *shadowView = [self.containerView viewWithTag:2017];
+    UIView *shadowView = [self.containerView viewWithTag:20170605];
     
     if (!shadowView) {
         shadowView = [[UIView alloc] initWithFrame:self.toView.bounds];
-        shadowView.tag = 2017;
+        shadowView.tag = 20170605;
         shadowView.backgroundColor = self.toView.backgroundColor;
         shadowView.layer.shadowOffset = CGSizeMake(-gTransionShadowWidth, 0);
         shadowView.layer.shadowRadius = gTransionShadowWidth;
