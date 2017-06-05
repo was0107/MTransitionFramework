@@ -41,7 +41,7 @@ static CGFloat gTransionShadowWidth = 6.0f;
         shadowView.layer.shadowRadius = gTransionShadowWidth;
         shadowView.layer.shadowOpacity = 0.4f;
         shadowView.layer.shadowPath = [UIBezierPath bezierPathWithRect:shadowView.bounds].CGPath;
-        shadowView.layer.shadowColor = [UIColor colorWithWhite:208.0f/255.0f alpha:1].CGColor;
+        shadowView.layer.shadowColor = [UIColor colorWithWhite:.0f alpha:0.5f].CGColor;
         [self.containerView insertSubview:shadowView belowSubview:self.toView];
     }
     
