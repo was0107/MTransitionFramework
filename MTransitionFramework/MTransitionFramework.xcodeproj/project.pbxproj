@@ -24,6 +24,7 @@
 		62008BCD1EC98D5E00C34B26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62008BCB1EC98D5E00C34B26 /* LaunchScreen.storyboard */; };
 		62008BD61EC98EC600C34B26 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62008BD51EC98EC600C34B26 /* MainTableViewController.m */; };
 		62008BD71EC990D000C34B26 /* MTransitionFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62008B981EC98CE300C34B26 /* MTransitionFramework.framework */; };
+		62CA85551EE1786D001A4359 /* UIViewController+Category1.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA85541EE1786D001A4359 /* UIViewController+Category1.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		62008BCE1EC98D5E00C34B26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62008BD41EC98EC600C34B26 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		62008BD51EC98EC600C34B26 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		62CA85531EE1786D001A4359 /* UIViewController+Category1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Category1.h"; sourceTree = "<group>"; };
+		62CA85541EE1786D001A4359 /* UIViewController+Category1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Category1.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,8 @@
 				62008BC11EC98D5E00C34B26 /* AppDelegate.m */,
 				62008BC31EC98D5E00C34B26 /* ViewController.h */,
 				62008BC41EC98D5E00C34B26 /* ViewController.m */,
+				62CA85531EE1786D001A4359 /* UIViewController+Category1.h */,
+				62CA85541EE1786D001A4359 /* UIViewController+Category1.m */,
 				62008BD41EC98EC600C34B26 /* MainTableViewController.h */,
 				62008BD51EC98EC600C34B26 /* MainTableViewController.m */,
 				62E97E901ED555D1009350BD /* New Group */,
@@ -269,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62CA85551EE1786D001A4359 /* UIViewController+Category1.m in Sources */,
 				62008BD61EC98EC600C34B26 /* MainTableViewController.m in Sources */,
 				62008BC51EC98D5E00C34B26 /* ViewController.m in Sources */,
 				62008BC21EC98D5E00C34B26 /* AppDelegate.m in Sources */,

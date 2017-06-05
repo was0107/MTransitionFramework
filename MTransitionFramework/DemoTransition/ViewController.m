@@ -8,12 +8,10 @@
 
 #import "ViewController.h"
 #import "UINavigationController+Transitioning.h"
-#import "MNavigationTransitioning.h"
 
 
 @interface BaseViewController()
 
-@property (nonatomic, strong) MNavigationTransitioning *navigationTransitioning;
 @property (nonatomic, strong) UIButton *button;
 @end
 
@@ -38,6 +36,7 @@
 
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    self.navigationTransitioning.enable = NO;
     [self.navigationController resetNavigationDelegate];
 }
 

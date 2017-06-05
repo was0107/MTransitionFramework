@@ -7,8 +7,10 @@
 //
 
 #import "MainTableViewController.h"
+#import "MNavigationTransitioning.h"
 
 @interface MainTableViewController ()
+@property (nonatomic, strong) MNavigationTransitioning *navigationTransitioning;
 
 @end
 
@@ -51,9 +53,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *controller = [[NSClassFromString(_datas[indexPath.row][@"class"]) alloc] init];
+
+    if (2 == indexPath.row) {
+        
+        self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioningModal") alloc] initWithController:self];
+        self.navigationTransitioning.enable = YES;
+    }
     controller.title = _datas[indexPath.row][@"name"];
     NSLog(@"self.nav = %@", self.navigationController);
     NSLog(@"self.nav.delegate = %@", self.navigationController.delegate);
     [self.navigationController pushViewController:controller animated:YES];
+    if (2 == indexPath.row) {
+    }
+
 }
 @end

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MNavigationTransitioning.h"
 
 @interface BaseViewController : UIViewController
-
+@property (nonatomic, strong) MNavigationTransitioning *navigationTransitioning;
+@property (nonatomic, weak) UIViewController *parenetController;
 
 @end
 

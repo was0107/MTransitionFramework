@@ -10,6 +10,8 @@
 #import "UINavigationController+Transitioning.h"
 #import "MNavigationTransitioning.h"
 
+static CGFloat gTransionShadowWidth = 6.0f;
+
 @interface MNavigationTransitioningLeftPush()
 
 @property (nonatomic, strong) UIPanGestureRecognizer *leftPushPanGesture;
@@ -20,7 +22,6 @@
 
 @implementation MNavigationTransitioningLeftPush
 
-
 - (BOOL) isPresenting {
     return YES;
 }
@@ -28,22 +29,36 @@
 - (void (^)(id<UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioning *trans)) block {
     __weak __typeof(self)weakSelf = self;
     CGSize size = self.containerView.bounds.size;
-    self.toView.frame = CGRectMake(size.width, 0, size.width, size.height);
     weakSelf.toView.userInteractionEnabled = NO;
+    
+    UIView *shadowView = [self.containerView viewWithTag:2017];
+    
+    if (!shadowView) {
+        shadowView = [[UIView alloc] initWithFrame:self.toView.bounds];
+        shadowView.tag = 2017;
+        shadowView.backgroundColor = self.toView.backgroundColor;
+        shadowView.layer.shadowOffset = CGSizeMake(-gTransionShadowWidth, 0);
+        shadowView.layer.shadowRadius = gTransionShadowWidth;
+        shadowView.layer.shadowOpacity = 0.4f;
+        shadowView.layer.shadowPath = [UIBezierPath bezierPathWithRect:shadowView.bounds].CGPath;
+        shadowView.layer.shadowColor = [UIColor colorWithWhite:208.0f/255.0f alpha:1].CGColor;
+        [self.containerView insertSubview:shadowView belowSubview:self.toView];
+    }
+    
+    shadowView.frame = self.toView.frame = CGRectMake(size.width, 0, size.width, size.height);
 
     return ^(id<UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioning *trans) {
         [UIView animateWithDuration:[trans transitionDuration:transitionContext]
                          animations:^
          {
              weakSelf.fromView.frame = CGRectMake(-0.3 * size.width, 0, size.width, size.height);
-             weakSelf.toView.frame = CGRectMake(0, 0, size.width, size.height);
-             
+             shadowView.frame = weakSelf.toView.frame = CGRectMake(0, 0, size.width, size.height);
          }
                          completion:^(BOOL finished)
          {
              
              weakSelf.fromView.frame = CGRectMake(0, 0, size.width, size.height);
-
+             [shadowView removeFromSuperview];
              [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
              weakSelf.toView.userInteractionEnabled = YES;
          }];
