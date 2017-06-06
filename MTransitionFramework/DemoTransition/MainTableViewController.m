@@ -8,6 +8,7 @@
 
 #import "MainTableViewController.h"
 #import "MNavigationTransitioning.h"
+#import "ViewController.h"
 
 @interface MainTableViewController ()
 @property (nonatomic, strong) MNavigationTransitioning *navigationTransitioning;
@@ -52,12 +53,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIViewController *controller = [[NSClassFromString(_datas[indexPath.row][@"class"]) alloc] init];
+    BaseViewController *controller = [[NSClassFromString(_datas[indexPath.row][@"class"]) alloc] init];
 
     if (2 == indexPath.row) {
-        
-        self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioningModal") alloc] initWithController:self];
-        self.navigationTransitioning.enable = YES;
+        controller.parenetController = self;
+//        self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioningModal") alloc] initWithController:self];
+//        self.navigationTransitioning.enable = YES;
     }
     controller.title = _datas[indexPath.row][@"name"];
     NSLog(@"self.nav = %@", self.navigationController);

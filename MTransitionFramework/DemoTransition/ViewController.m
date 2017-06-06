@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "UINavigationController+Transitioning.h"
-
+#import <objc/runtime.h>
 
 @interface BaseViewController()
 
@@ -125,10 +125,48 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
-    self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioningModal") alloc] initWithController:self];
 }
 
+static char MNavigation;
+- (void) setParenetController:(UIViewController *)parenetController {
+    [super setParenetController:parenetController];
+    
+    if (parenetController) {
+        MNavigationTransitioning * transion = objc_getAssociatedObject(parenetController, &MNavigation);;
+        if (!transion) {
+            transion = [[NSClassFromString(@"MNavigationTransitioningModal") alloc] initWithController:parenetController];
+            transion.enable = YES;
+            objc_setAssociatedObject(parenetController, &MNavigation, transion, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
+    }
+}
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.parenetController) {
+        MNavigationTransitioning * transion = objc_getAssociatedObject(self.parenetController, &MNavigation);;
+        transion.enable = YES;
+    }
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    if (self.parenetController) {
+        MNavigationTransitioning * transion = objc_getAssociatedObject(self.parenetController, &MNavigation);;
+        transion.enable = NO;
+        objc_setAssociatedObject(self.parenetController, &MNavigation, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+}
+
+- (IBAction)buttonAction:(id)sender {
+    if (self.parenetController) {
+        MNavigationTransitioning * transion = objc_getAssociatedObject(self.parenetController, &MNavigation);;
+        transion.enable = NO;
+    }
+    BaseViewController *controller = [[BaseViewController alloc] init];
+    controller.title = @"Demo";
+    [self.navigationController pushViewController:controller animated:YES];
+}
 @end
 
 
