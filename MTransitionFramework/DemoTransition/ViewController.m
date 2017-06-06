@@ -125,6 +125,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成"
+                                                                             style:UIBarButtonItemStyleDone
+                                                                            target:self
+                                                                            action:@selector(doneAction:)];
+}
+
+- (void) doneAction:(id) sender {
+    if (self.parenetController) {
+        MNavigationTransitioning * transion = objc_getAssociatedObject(self.parenetController, &MNavigation);;
+        if (!transion) {
+            transion = [[NSClassFromString(@"MNavigationTransitioningModal") alloc] initWithController:self.parenetController];
+            transion.enable = YES;
+            objc_setAssociatedObject(self.parenetController, &MNavigation, transion, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 static char MNavigation;
@@ -147,7 +164,10 @@ static char MNavigation;
         MNavigationTransitioning * transion = objc_getAssociatedObject(self.parenetController, &MNavigation);;
         transion.enable = YES;
     }
+    
 }
+
+
 
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
