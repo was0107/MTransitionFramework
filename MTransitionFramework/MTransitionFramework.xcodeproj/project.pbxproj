@@ -24,7 +24,12 @@
 		62008BCD1EC98D5E00C34B26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62008BCB1EC98D5E00C34B26 /* LaunchScreen.storyboard */; };
 		62008BD61EC98EC600C34B26 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62008BD51EC98EC600C34B26 /* MainTableViewController.m */; };
 		62008BD71EC990D000C34B26 /* MTransitionFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62008B981EC98CE300C34B26 /* MTransitionFramework.framework */; };
+		6202BE01255BB3AE00BDDB7E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6202BE00255BB3AE00BDDB7E /* WebKit.framework */; };
 		62CA85551EE1786D001A4359 /* UIViewController+Category1.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA85541EE1786D001A4359 /* UIViewController+Category1.m */; };
+		62FF221D24AA0451008B5B35 /* MLiveFloatingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 62FF221924AA0451008B5B35 /* MLiveFloatingView.h */; };
+		62FF221E24AA0451008B5B35 /* MFloatingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 62FF221A24AA0451008B5B35 /* MFloatingView.h */; };
+		62FF221F24AA0451008B5B35 /* MLiveFloatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FF221B24AA0451008B5B35 /* MLiveFloatingView.m */; };
+		62FF222024AA0451008B5B35 /* MFloatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FF221C24AA0451008B5B35 /* MFloatingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,8 +56,13 @@
 		62008BCE1EC98D5E00C34B26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62008BD41EC98EC600C34B26 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		62008BD51EC98EC600C34B26 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		6202BE00255BB3AE00BDDB7E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		62CA85531EE1786D001A4359 /* UIViewController+Category1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Category1.h"; sourceTree = "<group>"; };
 		62CA85541EE1786D001A4359 /* UIViewController+Category1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Category1.m"; sourceTree = "<group>"; };
+		62FF221924AA0451008B5B35 /* MLiveFloatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLiveFloatingView.h; sourceTree = "<group>"; };
+		62FF221A24AA0451008B5B35 /* MFloatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFloatingView.h; sourceTree = "<group>"; };
+		62FF221B24AA0451008B5B35 /* MLiveFloatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLiveFloatingView.m; sourceTree = "<group>"; };
+		62FF221C24AA0451008B5B35 /* MFloatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFloatingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6202BE01255BB3AE00BDDB7E /* WebKit.framework in Frameworks */,
 				62008BD71EC990D000C34B26 /* MTransitionFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,9 +88,11 @@
 		62008B8E1EC98CE300C34B26 = {
 			isa = PBXGroup;
 			children = (
+				62FF221824AA0451008B5B35 /* FloatingView */,
 				62008B9A1EC98CE300C34B26 /* MTransitionFramework */,
 				62008BBC1EC98D5E00C34B26 /* DemoTransition */,
 				62008B991EC98CE300C34B26 /* Products */,
+				6202BDFF255BB3AE00BDDB7E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +147,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6202BDFF255BB3AE00BDDB7E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6202BE00255BB3AE00BDDB7E /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		62E97E901ED555D1009350BD /* New Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +166,17 @@
 			name = "New Group";
 			sourceTree = "<group>";
 		};
+		62FF221824AA0451008B5B35 /* FloatingView */ = {
+			isa = PBXGroup;
+			children = (
+				62FF221A24AA0451008B5B35 /* MFloatingView.h */,
+				62FF221C24AA0451008B5B35 /* MFloatingView.m */,
+				62FF221924AA0451008B5B35 /* MLiveFloatingView.h */,
+				62FF221B24AA0451008B5B35 /* MLiveFloatingView.m */,
+			);
+			path = FloatingView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -153,9 +185,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				62008B9D1EC98CE300C34B26 /* MTransitionFramework.h in Headers */,
+				62FF221D24AA0451008B5B35 /* MLiveFloatingView.h in Headers */,
 				62008BB11EC98D3900C34B26 /* UINavigationController+Transitioning.h in Headers */,
 				62008BAB1EC98D3900C34B26 /* MNavigationTransitioning.h in Headers */,
 				62008BAF1EC98D3900C34B26 /* MNavigationTransitioningLeftPush.h in Headers */,
+				62FF221E24AA0451008B5B35 /* MFloatingView.h in Headers */,
 				62008BAD1EC98D3900C34B26 /* MNavigationControllerDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,6 +258,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -266,6 +301,8 @@
 				62008BB01EC98D3900C34B26 /* MNavigationTransitioningLeftPush.m in Sources */,
 				62008BAE1EC98D3900C34B26 /* MNavigationControllerDelegate.m in Sources */,
 				62008BAC1EC98D3900C34B26 /* MNavigationTransitioning.m in Sources */,
+				62FF221F24AA0451008B5B35 /* MLiveFloatingView.m in Sources */,
+				62FF222024AA0451008B5B35 /* MFloatingView.m in Sources */,
 				62008BB21EC98D3900C34B26 /* UINavigationController+Transitioning.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

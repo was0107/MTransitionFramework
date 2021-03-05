@@ -96,8 +96,8 @@ static CGFloat gTransionShadowWidth = 6.0f;
     
     CGFloat progress = [recognizer translationInView:self.viewController.view].x / (self.viewController.view.bounds.size.width);
 
-    BOOL canLeftPush = NO;
-    if (!self.delegate || [self.delegate respondsToSelector:@selector(canResponseToNavigationLeftPush)]) {
+    BOOL canLeftPush = YES;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(canResponseToNavigationLeftPush)]) {
         canLeftPush = [self.delegate canResponseToNavigationLeftPush];
     }
     if (!canLeftPush) {
