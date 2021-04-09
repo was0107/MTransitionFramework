@@ -22,10 +22,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _datas = @[@{@"name":@"左滑进入", @"class":@"LeftPushViewController"},
-               @{@"name":@"居中进入", @"class":@"CenterViewController"},
-               @{@"name":@"模态进入", @"class":@"ModalViewController"},
-               @{@"name":@"自定义",   @"class":@"CustomViewController"}];
+    _datas = @[
+    @{@"name":@"左滑进入", @"class":@"LeftPushViewController"},
+    @{@"name":@"居中进入", @"class":@"CenterViewController"},
+    @{@"name":@"模态进入", @"class":@"ModalViewController"},
+    @{@"name":@"自定义",   @"class":@"CustomViewController"},
+    @{@"name":@"半弹出框进入", @"class":@"HalfModalPresentedViewController"}];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 }

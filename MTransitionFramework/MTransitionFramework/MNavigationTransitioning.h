@@ -8,14 +8,15 @@
 
 #import "MNavigationControllerDelegate.h"
 
-@interface MNavigationTransitioning : MNavigationControllerDelegate<UIViewControllerAnimatedTransitioning>
-@property (nonatomic, assign, getter=isPresenting) BOOL presenting;         //presenting or not
+@interface MNavigationTransitioning : MNavigationControllerDelegate<UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate>
+@property (nonatomic, assign, getter=isPresenting, setter=setPresenting:) BOOL presenting;         //presenting or not
 @property (nonatomic, weak) UIViewController  *viewController;   //releate controller
 @property (nonatomic, weak) UIViewController *fromVC;
 @property (nonatomic, weak) UIViewController *toVC;
 @property (nonatomic, weak) UIView *containerView;
 @property (nonatomic, weak) UIView *fromView;
 @property (nonatomic, weak) UIView *toView;
+@property (nonatomic, assign) NSTimeInterval animateTime;
 @property (nonatomic, assign) BOOL enable;
 
 

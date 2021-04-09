@@ -25,6 +25,8 @@
 		62008BD61EC98EC600C34B26 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62008BD51EC98EC600C34B26 /* MainTableViewController.m */; };
 		62008BD71EC990D000C34B26 /* MTransitionFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62008B981EC98CE300C34B26 /* MTransitionFramework.framework */; };
 		6202BE01255BB3AE00BDDB7E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6202BE00255BB3AE00BDDB7E /* WebKit.framework */; };
+		6289F86B261EF347004CB70F /* MNavigationPresenting.h in Headers */ = {isa = PBXBuildFile; fileRef = 6289F869261EF347004CB70F /* MNavigationPresenting.h */; };
+		6289F86C261EF347004CB70F /* MNavigationPresenting.m in Sources */ = {isa = PBXBuildFile; fileRef = 6289F86A261EF347004CB70F /* MNavigationPresenting.m */; };
 		62CA85551EE1786D001A4359 /* UIViewController+Category1.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CA85541EE1786D001A4359 /* UIViewController+Category1.m */; };
 		62FF221D24AA0451008B5B35 /* MLiveFloatingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 62FF221924AA0451008B5B35 /* MLiveFloatingView.h */; };
 		62FF221E24AA0451008B5B35 /* MFloatingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 62FF221A24AA0451008B5B35 /* MFloatingView.h */; };
@@ -57,6 +59,8 @@
 		62008BD41EC98EC600C34B26 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		62008BD51EC98EC600C34B26 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		6202BE00255BB3AE00BDDB7E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		6289F869261EF347004CB70F /* MNavigationPresenting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNavigationPresenting.h; sourceTree = "<group>"; };
+		6289F86A261EF347004CB70F /* MNavigationPresenting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNavigationPresenting.m; sourceTree = "<group>"; };
 		62CA85531EE1786D001A4359 /* UIViewController+Category1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Category1.h"; sourceTree = "<group>"; };
 		62CA85541EE1786D001A4359 /* UIViewController+Category1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Category1.m"; sourceTree = "<group>"; };
 		62FF221924AA0451008B5B35 /* MLiveFloatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLiveFloatingView.h; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 				62008BA61EC98D3900C34B26 /* MNavigationControllerDelegate.m */,
 				62008BA31EC98D3900C34B26 /* MNavigationTransitioning.h */,
 				62008BA41EC98D3900C34B26 /* MNavigationTransitioning.m */,
+				6289F869261EF347004CB70F /* MNavigationPresenting.h */,
+				6289F86A261EF347004CB70F /* MNavigationPresenting.m */,
 				62008BA71EC98D3900C34B26 /* MNavigationTransitioningLeftPush.h */,
 				62008BA81EC98D3900C34B26 /* MNavigationTransitioningLeftPush.m */,
 				62008BA91EC98D3900C34B26 /* UINavigationController+Transitioning.h */,
@@ -185,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62008B9D1EC98CE300C34B26 /* MTransitionFramework.h in Headers */,
+				6289F86B261EF347004CB70F /* MNavigationPresenting.h in Headers */,
 				62FF221D24AA0451008B5B35 /* MLiveFloatingView.h in Headers */,
 				62008BB11EC98D3900C34B26 /* UINavigationController+Transitioning.h in Headers */,
 				62008BAB1EC98D3900C34B26 /* MNavigationTransitioning.h in Headers */,
@@ -302,6 +309,7 @@
 				62008BAE1EC98D3900C34B26 /* MNavigationControllerDelegate.m in Sources */,
 				62008BAC1EC98D3900C34B26 /* MNavigationTransitioning.m in Sources */,
 				62FF221F24AA0451008B5B35 /* MLiveFloatingView.m in Sources */,
+				6289F86C261EF347004CB70F /* MNavigationPresenting.m in Sources */,
 				62FF222024AA0451008B5B35 /* MFloatingView.m in Sources */,
 				62008BB21EC98D3900C34B26 /* UINavigationController+Transitioning.m in Sources */,
 			);

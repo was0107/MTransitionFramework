@@ -10,7 +10,6 @@
 #import "UINavigationController+Transitioning.h"
 
 @interface MNavigationTransitioning ()
-@property (nonatomic, assign) NSTimeInterval animateTime;
 @property (nonatomic, copy) void (^block)(id <UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioning *trans) ;
 @property (nonatomic, copy) void (^endBlock)(id <UIViewControllerContextTransitioning> transitionContext, MNavigationTransitioning *trans) ;
 
@@ -36,6 +35,10 @@
 
 - (void) setEnable:(BOOL)enable {
     _enable = enable;
+    [self transitionEnable];
+}
+
+- (void) transitionEnable {
     if (_enable) {
         self.viewController.navigationController.delegate = self;
     } else {

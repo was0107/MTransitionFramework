@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "UINavigationController+Transitioning.h"
 #import "MLiveFloatingView.h"
+#import "MNavigationPresenting.h"
 
 #import <objc/runtime.h>
 
@@ -30,7 +31,7 @@
     if ([self.title length] == 0) {
         self.title = NSStringFromClass([self class]);
     }
-    NSLog(@"deallllloc t = %@ || %@", self, self.title);
+    NSLog(@"viewDidLoad = %@ || %@", self, self.title);
     self.view.backgroundColor = [UIColor whiteColor];
     {
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -285,4 +286,108 @@ static char MNavigation;
     }];
 }
 
+@end
+
+
+@implementation HalfModalPresentedViewController
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor yellowColor];
+
+//    self.navigationTransitioning = [[NSClassFromString(@"MNavigationTransitioning") alloc] initWithController:self];
+
+//    
+//    self.transitioningDelegate = self.navigationTransitioning;
+//    self.navigationTransitioning.enable = YES;
+}
+
+- (IBAction)buttonAction:(id)sender {
+    HalfModalPresentingViewController *controller = [[HalfModalPresentingViewController alloc] init];
+    controller.title = @"Demo";
+    
+    controller.orignController = self;
+    [self presentViewController:controller animated:YES completion:nil];
+}
+@end
+
+
+@interface MYZSTGestureDelegate : NSObject<UIGestureRecognizerDelegate>
+@property (nonatomic, strong) NSArray *disableGestures;
+@end
+
+@implementation MYZSTGestureDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if ([self.disableGestures containsObject:otherGestureRecognizer]) {
+        return NO;
+    }
+    return [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
+}
+@end
+
+
+@interface HalfModalPresentingViewController()
+
+@property (nonatomic, strong) MYZSTGestureDelegate *delegate;
+@end
+
+
+@implementation HalfModalPresentingViewController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.navigationTransitioning = [[NSClassFromString(@"MNavigationPresenting") alloc] initWithController:self];
+        self.transitioningDelegate = self.navigationTransitioning;
+        self.modalPresentationStyle = UIModalPresentationFullScreen;
+
+        MNavigationPresenting *transioning = (MNavigationPresenting *)self.navigationTransitioning;
+        transioning.presenting = YES;
+        transioning.animateTime = 0.25;
+        __weak __typeof(self)weakSelf = self;
+        transioning.backViewTapedBlock = ^{
+            [weakSelf buttonAction:nil];
+        };
+    }
+    return self;
+}
+
+- (MYZSTGestureDelegate *) delegate {
+    if (!_delegate) {
+        _delegate = [[MYZSTGestureDelegate alloc] init];
+    }
+    return _delegate;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    MNavigationPresenting *transioning = (MNavigationPresenting *)self.navigationTransitioning;
+    transioning.panGesture.delegate = self.delegate;
+    
+    BOOL useScrollView = YES;
+    
+    if (useScrollView) {
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
+        self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) * 2);
+        [self.scrollView addSubview:self.button];
+        [self.view addSubview:self.scrollView];
+        [self.scrollView addGestureRecognizer:transioning.panGesture];
+    } else {
+        [self.view addGestureRecognizer:transioning.panGesture];
+    }
+    
+    
+    self.view.backgroundColor = [UIColor grayColor];
+}
+
+- (IBAction)buttonAction:(id)sender {
+    MNavigationTransitioning *transioning = (MNavigationTransitioning *)self.navigationTransitioning;
+    transioning.presenting = NO;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

@@ -35,3 +35,13 @@
 @interface CustomViewController : BaseViewController
 
 @end
+
+@interface HalfModalPresentedViewController : BaseViewController
+
+@end
+
+@interface HalfModalPresentingViewController : BaseViewController<UIViewControllerTransitioningDelegate>
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, weak) UIViewController *orignController;
+
+@end
